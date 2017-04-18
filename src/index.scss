@@ -1,3 +1,6 @@
+input{
+  border: 1px solid #248;
+}
 .top_nav{
   position: fixed;
   z-index: 99;
@@ -28,7 +31,7 @@
   position: fixed;
   top: 0;
   right: 0;
-  background: #ff0428;
+  background: #42b983;
   width: 20%;
   height: 100%;
   box-sizing: border-box;

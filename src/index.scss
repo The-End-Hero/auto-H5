@@ -42,38 +42,73 @@ input{
 }
 #add_cut{
   height: 30px;
-  //background: #45a;
   #add{
-    width: 30px;
     float: left;
-    //border: 1px solid #111 ;
-    //border-radius: 4px;
-    //font-size: 14px;
-    //line-height: 20px;
     padding: 0px 10px;
     margin: 0 15px;
     cursor: pointer;
   }
   #cut{
-    width: 30px;
     float: left;
-    //border: 1px solid #111 ;
-    //border-radius: 4px;
-    //font-size: 14px;
-    //line-height: 20px;
     padding: 0px 10px;
     cursor: pointer;
   }
 }
 .created_div{
   min-height: 20px;
-  //background-color: deeppink;
-  //background: url("http://cpmall-cdn.coolpad.com/images/41739c87-9bfc-4e83-94f5-e8984c9fe625.png");
+  .uselessspan{
+    position: absolute;
+    background: black;
+    font-size: 14px;
+    color:#fff;
+    min-width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 20px;
+  }
 }
 
 .contrl{
   box-shadow:  0 1px 0 0 #eeeeee;
+  .num{
+    display: inline-block;
+    background: black;
+    font-size: 14px;
+    color:#fff;
+    min-width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 20px;
+    margin: 5px;
+  }
+  .btn{
+    display: block;
+  }
 }
 button{
 
+}
+
+.contextright_3{
+  border: 1px solid #111;
+  background: #fff;
+  div{
+    text-align: center;
+    padding: 2px 5px;
+  }
+  div:hover{
+    transition: all 0.3s;
+    background: #000;
+    color: #fff;
+
+  }
+}
+.blank_a{
+  border: 1px solid #000;
+  min-width: 20px;
+  min-height: 20px;
+  background: #fff;
+  opacity: 0.6;
 }

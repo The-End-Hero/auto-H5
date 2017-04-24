@@ -147,6 +147,6 @@ $(function () {
         strVar += "                <\/label>\n";
         strVar += "            <\/div>\n";
         strVar += "            <button type=\"button\" class=\"btn btn-primary\">确认<\/button>\n";
-        $('.created_div_'+created_num).append()
+        $('.created_div_'+created_num).append(strVar)
     })
 })

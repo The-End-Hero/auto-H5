@@ -56,9 +56,14 @@ $(function () {
         $(this).parent().next().attr('data-background', $(this).val())
         console.log($(this).parent().next())
     })
+    /**btn公用方法
+     * 外层div创建img-->背景图片
+     * 
+     *
+     *
+     */
     $(document).on('click', '.btn', function () {
         // btn点击  data-id 目标元素id
-        //
         var id = $(this).attr('data-id')
         if($(this).attr('data-background')){//如果有data-background属性-->生成img标签
             var background = $(this).attr('data-background')
@@ -87,9 +92,6 @@ $(function () {
                 var strVar = "";
                 strVar += "<div class=\"contextright_3\"style=\"position:absolute;left: " + e.offsetX + "px; top: " + e.offsetY + "px;\">\n";
                 strVar += "            <div id=\"created_click_a\">添加点击区域<\/div>\n";
-                // strVar += "            <div>添加点击区域<\/div>\n";
-                // strVar += "            <div>添加点<\/div>\n";
-                // strVar += "            <div>添加点击区域<\/div>\n";
                 strVar += "            <div id=\"created_content_div\">添加内容区域<\/div>\n";
                 strVar += "        <\/div>\n";
                 $_this.append(strVar)

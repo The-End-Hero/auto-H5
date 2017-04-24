@@ -6,7 +6,12 @@ $(function () {
     function synchronization() {
         localStorage.setItem('auto_h5',created_data)
     }
-    // 创造div的代号
+
+    /**创造div的代号
+     * created_num--->控制最外层div
+     *
+     */
+
     var created_num = 0;
     var created_data= {
         created_div:[],
@@ -58,14 +63,15 @@ $(function () {
     })
     /**btn公用方法
      * 外层div创建img-->背景图片
-     * 
+     *
      *
      *
      */
     $(document).on('click', '.btn', function () {
         // btn点击  data-id 目标元素id
         var id = $(this).attr('data-id')
-        if($(this).attr('data-background')){//如果有data-background属性-->生成img标签
+        //如果存在data-background属性-->生成img标签
+        if($(this).attr('data-background')){
             var background = $(this).attr('data-background')
             console.log($('#' + id).children('img').length)
             if ($('#' + id).children('img').length > 0) {
@@ -114,15 +120,26 @@ $(function () {
         // 更新data
         var length = created_data.created_div[$(this).parent().parent().attr('data-id')-1].divs.length||0
         created_data.created_div[$(this).parent().parent().attr('data-id')-1].divs.push({id:length,type:'a'})
+        console.log(created_data)
 
-
-        // 新增点击a标签区域
-        $(this).parent().parent().append('<a class="blank_a" style="position: absolute;left: 50%; z-index: 10;"></a>')
+        /**  新增点击a标签区域
+         * 1.是否新建页面跳转(默认新建)
+         * 2.href的路径
+         * 3.埋点自定义属性-->可以根据href路径判断生成
+         */
+        $(this).parent().parent().append('<a class="blank_a" target="_blank" style="position: absolute;left: 50%; z-index: 10;"></a>')
 
 
         //tab新增更改属性列表
+        let num_a = 1
+        for (let i = 0; i < length; i++) {
+            if(created_data.created_div[$(this).parent().parent().attr('data-id')-1].divs[i].type=='a'){
+                ++num_a
+            }
+        }
+        var num = $(this).parent().parent().attr('data-id')+'-'+num_a
         var strVar = "";
-        strVar += "<div class=\"num\">1-1<\/div>\n";
+        strVar += "<div class=\"num\">"+num+"<\/div>\n";
         strVar += "            <div class=\"form-group\">\n";
         strVar += "                <label for=\"exampleInputName2\">宽度:<\/label>\n";
         strVar += "                <input type=\"text\" class=\"form-control\" id=\"exampleInputName2\" placeholder=\"请使用%\">\n";
@@ -145,10 +162,10 @@ $(function () {
         strVar += "            <\/div>\n";
         strVar += "            <div class=\"checkbox\">\n";
         strVar += "                <label>\n";
-        strVar += "                    <input type=\"checkbox\">跳转是否新建页面(默认不新建)\n";
+        strVar += "                    <input type=\"checkbox\">跳转是否新建页面(默认新建)\n";
         strVar += "                <\/label>\n";
         strVar += "            <\/div>\n";
         strVar += "            <button type=\"button\" class=\"btn btn-primary\">确认<\/button>\n";
-        $('.created_div_'+created_num).append(strVar)
+        $('.created_div_'+$(this).parent().parent().attr('data-id')).append(strVar)
     })
 })

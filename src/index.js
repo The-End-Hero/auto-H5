@@ -17,9 +17,14 @@ $(function () {
         created_div:[],
         type:'pc'
     }
-    Object.defineProperty(created_data,'',{
-
-    })
+    // Object.defineProperty(created_data.created_div,created_num,{
+    //     set:function (newdata) {
+    //
+    //     },
+    //     get:function () {
+    //
+    //     }
+    // })
     $('#pc').on('click', function () {
         $('.create').css({
             width: '70%'
@@ -32,7 +37,7 @@ $(function () {
         })
         $('.create').html('')
     })
-
+    // 添加模块
     $('#add').on('click', function () {
         ++created_num
         var str = "<div style=\"width:100%;position:relative\" data-id=\""+created_num+"\" class=\"created_div\" id=\"created_div_" + created_num + "\"><span class=\"uselessspan\">" + created_num + "</span></div>"
@@ -50,6 +55,7 @@ $(function () {
         created_data.created_div[created_num-1]={id:created_num,divs:[]}
         console.log(created_data)
     })
+    // 删除模块
     $('#cut').on('click', function () {
         $('.contrl:nth-of-type(' + created_num + ')').remove()
         created_data.created_div.splice(created_num-1,1)
@@ -57,9 +63,12 @@ $(function () {
         --created_num
         $('#add_cut').prev().remove()
     })
-    $(document).on('click', '.created_div', function () {
-        console.log(this.style)
-    })
+
+    // $(document).on('click', '.created_div', function () {
+    //     console.log(this.style)
+    // })
+
+
     $(document).on('keyup', '.form-control', function () {
         $(this).parent().next().attr('data-background', $(this).val())
         console.log($(this).parent().next())
@@ -86,6 +95,8 @@ $(function () {
 
 
     })
+
+    // 阻止右键默认行为
     $(document).on("contextmenu", function (e) {
         return false;
     });
@@ -146,29 +157,19 @@ $(function () {
         strVar += "            <div class=\"form-group\">\n";
         strVar += "                <label for=\"exampleInputName2\">宽度:<\/label>\n";
         strVar += "                <input type=\"text\" class=\"form-control\" id=\"exampleInputName2\" placeholder=\"请使用%\">\n";
-        strVar += "            <\/div>\n";
-        strVar += "            <div class=\"form-group\">\n";
         strVar += "                <label for=\"exampleInputName2\">高度:<\/label>\n";
         strVar += "                <input type=\"text\" class=\"form-control\" id=\"exampleInputName2\" placeholder=\"请使用%\">\n";
-        strVar += "            <\/div>\n";
-        strVar += "            <div class=\"form-group\">\n";
         strVar += "                <label for=\"exampleInputName2\">距离左边:<\/label>\n";
         strVar += "                <input type=\"text\" class=\"form-control\" id=\"exampleInputName2\" placeholder=\"请使用%\">\n";
-        strVar += "            <\/div>\n";
-        strVar += "            <div class=\"form-group\">\n";
         strVar += "                <label for=\"exampleInputName2\">距离顶部:<\/label>\n";
         strVar += "                <input type=\"text\" class=\"form-control\" id=\"exampleInputName2\" placeholder=\"请使用%\">\n";
-        strVar += "            <\/div>\n";
-        strVar += "            <div class=\"form-group\">\n";
         strVar += "                <label for=\"exampleInputName2\">跳转地址:<\/label>\n";
         strVar += "                <input type=\"text\" class=\"form-control\" id=\"exampleInputName2\" placeholder=\"请使用%\">\n";
-        strVar += "            <\/div>\n";
-        strVar += "            <div class=\"checkbox\">\n";
         strVar += "                <label>\n";
         strVar += "                    <input type=\"checkbox\">跳转是否新建页面(默认新建)\n";
         strVar += "                <\/label>\n";
         strVar += "            <\/div>\n";
         strVar += "            <button type=\"button\" class=\"btn btn-primary\">确认<\/button>\n";
-        $('.created_div_'+$(this).parent().parent().attr('data-id')).append(strVar)
+        $('.created_div_'+$(this).parent().parent().attr('data-id')).append(strVar) 
     })
 })

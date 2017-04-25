@@ -3,11 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <style>
-        img{
-            width: 20px;
-        }
-    </style>
     <script
             src="https://code.jquery.com/jquery-3.2.1.js"
             integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
@@ -19,20 +14,21 @@
 <input id="input2" type="text">
 <script>
     $(function () {
-        var created_data={}
-        Object.defineProperty(created_data,'created_div',{
-            set:function (newdata) {
-                document.querySelector('#div1').innerHTML=newdata
-                document.querySelector('#input2').value=newdata
-                document.querySelector('#input1').value=newdata
+        var created_data = {}
+        Object.defineProperty(created_data, 'created_div', {
+            set: function (newdata) {
+                document.querySelector('#div1').innerHTML = newdata
+                document.querySelector('#input2').value = newdata
+                document.querySelector('#input1').value = newdata
             },
-            get:function () {
-            
+            get: function () {
+
             }
         })
-        $(document).on('keyup','#input1,#input2',function () {
-            created_data.created_div=$(this).val()
+        $(document).on('keyup', '#input1,#input2', function () {
+            created_data.created_div = $(this).val()
         })
+
     })
 </script>
 </body>

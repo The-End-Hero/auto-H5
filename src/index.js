@@ -17,6 +17,9 @@ $(function () {
         created_div:[],
         type:'pc'
     }
+    Object.defineProperty(created_data,'',{
+
+    })
     $('#pc').on('click', function () {
         $('.create').css({
             width: '70%'

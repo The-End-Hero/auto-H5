@@ -47,10 +47,10 @@ $(function () {
         strVar += "            <div class=\"num\">" + created_num + "<\/div>\n";
         strVar += "            <div class=\"form-group\">\n";
         strVar += "                <label for=\"exampleInputName" + created_num + "\">设置背景图片:<\/label>\n";
-        strVar += "                <input type=\"text\" class=\"form-control\" id=\"exampleInputName" + created_num + "\" placeholder=\"\">\n";
+        strVar += "                <input type=\"text\" class=\"form-control data-background\" id=\"exampleInputName" + created_num + "\" placeholder=\"\">\n";
         strVar += "            <\/div>\n";
         strVar += "            <button type=\"button\" class=\"btn btn-primary\" data-id=\"created_div_" + created_num + "\">确认<\/button>\n";
-        strVar += "        <\/div>\n";
+        strVar += "<\/div>\n";
         $('.left_contrl').append(strVar)
         created_data.created_div[created_num-1]={id:created_num,divs:[]}
         console.log(created_data)
@@ -68,9 +68,24 @@ $(function () {
     //     console.log(this.style)
     // })
 
-
+    /**input公用事件
+     *
+      */
     $(document).on('keyup', '.form-control', function () {
-        $(this).parent().next().attr('data-background', $(this).val())
+        if($(this).hasClass('data-background')){
+            $(this).parent().next().attr('data-background', $(this).val())
+        }else if($(this).hasClass('data-width')){
+            $(this).parent().next().attr('data-width', $(this).val())
+        }else if($(this).hasClass('data-height')){
+            $(this).parent().next().attr('data-height', $(this).val())
+        }else if($(this).hasClass('data-left')){
+            $(this).parent().next().attr('data-left', $(this).val())
+        }else if($(this).hasClass('data-top')){
+            $(this).parent().next().attr('data-top', $(this).val())
+        }else if($(this).hasClass('data-href')){
+            $(this).parent().next().attr('data-href', $(this).val())
+        }
+
         console.log($(this).parent().next())
     })
     /**btn公用方法
@@ -81,7 +96,7 @@ $(function () {
      */
     $(document).on('click', '.btn', function () {
         // btn点击  data-id 目标元素id
-        var id = $(this).attr('data-id')
+        const id = $(this).attr('data-id')
         //如果存在data-background属性-->生成img标签
         if($(this).attr('data-background')){
             var background = $(this).attr('data-background')
@@ -90,7 +105,19 @@ $(function () {
                 $('#' + id).children('img').attr('src', background)
                 return false
             }
-            $('#' + id).append("        <img src=\"" + background + "\" style=\"display: block; width: 100%\" alt=\"\">\n")
+            $('#' + id).append("<img src=\"" + background + "\" style=\"display: block; width: 100%\" alt=\"\">\n")
+        }
+        if($(this).attr('data-width')&&$(this).attr('data-height')&&$(this).attr('data-left')&&$(this).attr('data-top')){
+            const css = {
+                width:$(this).attr('data-width')+'',
+                height:$(this).attr('data-height')+'',
+                left:$(this).attr('data-left')+'',
+                top:$(this).attr('data-top')+'',
+            }
+            $('#' + id).css(css)
+        }
+        if($(this).attr('data-href')){
+            $('#' + id).attr('href',$(this).attr('data-href'))
         }
 
 
@@ -113,7 +140,7 @@ $(function () {
                 strVar += "<div class=\"contextright_3\"style=\"position:absolute;left: " + e.offsetX + "px; top: " + e.offsetY + "px;\">\n";
                 strVar += "            <div id=\"created_click_a\">添加点击区域<\/div>\n";
                 strVar += "            <div id=\"created_content_div\">添加内容区域<\/div>\n";
-                strVar += "        <\/div>\n";
+                strVar += "<\/div>\n";
                 $_this.append(strVar)
             }
             if ($(this).children('.contextright_3').length > 0) {
@@ -141,7 +168,6 @@ $(function () {
          * 2.href的路径
          * 3.埋点自定义属性-->可以根据href路径判断生成
          */
-        $(this).parent().parent().append('<a class="blank_a" target="_blank" style="position: absolute;left: 50%; z-index: 10;"></a>')
 
 
         //tab新增更改属性列表
@@ -152,24 +178,25 @@ $(function () {
             }
         }
         var num = $(this).parent().parent().attr('data-id')+'-'+num_a
+        $(this).parent().parent().append("<a class=\"blank_a\" id=\"created_a_"+num+"\" target=\"_blank\" style=\"position: absolute;left: 50%; top: 0%;z-index: 10;\"><\/a>\n")
         var strVar = "";
-        strVar += "<div class=\"num\">"+num+"<\/div>\n";
-        strVar += "            <div class=\"form-group\">\n";
-        strVar += "                <label for=\"exampleInputName2\">宽度:<\/label>\n";
-        strVar += "                <input type=\"text\" class=\"form-control\" id=\"exampleInputName2\" placeholder=\"请使用%\">\n";
-        strVar += "                <label for=\"exampleInputName2\">高度:<\/label>\n";
-        strVar += "                <input type=\"text\" class=\"form-control\" id=\"exampleInputName2\" placeholder=\"请使用%\">\n";
-        strVar += "                <label for=\"exampleInputName2\">距离左边:<\/label>\n";
-        strVar += "                <input type=\"text\" class=\"form-control\" id=\"exampleInputName2\" placeholder=\"请使用%\">\n";
-        strVar += "                <label for=\"exampleInputName2\">距离顶部:<\/label>\n";
-        strVar += "                <input type=\"text\" class=\"form-control\" id=\"exampleInputName2\" placeholder=\"请使用%\">\n";
-        strVar += "                <label for=\"exampleInputName2\">跳转地址:<\/label>\n";
-        strVar += "                <input type=\"text\" class=\"form-control\" id=\"exampleInputName2\" placeholder=\"请使用%\">\n";
-        strVar += "                <label>\n";
-        strVar += "                    <input type=\"checkbox\">跳转是否新建页面(默认新建)\n";
-        strVar += "                <\/label>\n";
-        strVar += "            <\/div>\n";
-        strVar += "            <button type=\"button\" class=\"btn btn-primary\">确认<\/button>\n";
+        strVar += "<div class=\"num\">"+num+'-a'+"<\/div>\n";
+        strVar += "<div class=\"form-group\">\n";
+        strVar += "            <label>宽度:<\/label>\n";
+        strVar += "            <input type=\"text\" class=\"form-control data-width\" placeholder=\"\">\n";
+        strVar += "            <label>高度:<\/label>\n";
+        strVar += "            <input type=\"text\" class=\"form-control data-height\" placeholder=\"\">\n";
+        strVar += "            <label>距离左边:<\/label>\n";
+        strVar += "            <input type=\"text\" class=\"form-control data-left\" placeholder=\"\">\n";
+        strVar += "            <label>距离顶部:<\/label>\n";
+        strVar += "            <input type=\"text\" class=\"form-control data-top\" placeholder=\"\">\n";
+        strVar += "            <label>跳转地址:<\/label>\n";
+        strVar += "            <input type=\"text\" class=\"form-control data-href\" placeholder=\"\">\n";
+        strVar += "            <label>\n";
+        strVar += "                <input type=\"checkbox\">跳转是否新建页面(默认新建)\n";
+        strVar += "            <\/label>\n";
+        strVar += "<\/div>\n";
+        strVar += "<button type=\"button\" data-id=\"created_a_"+num+"\" class=\"btn btn-primary\">确认<\/button>\n";
         $('.created_div_'+$(this).parent().parent().attr('data-id')).append(strVar) 
     })
 })
